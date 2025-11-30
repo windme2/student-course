@@ -1,8 +1,8 @@
 # 🎓 Student Course Management System
 
-> **🚀 [Live Demo](https://student-course-cxj7.onrender.com)**
-
 **is a web-based application designed to facilitate the management of academic records. It provides a comprehensive interface for administrators to manage students, courses, and enrollments efficiently. The system features a modern, responsive user interface and a robust RESTful API backend.**
+
+> **🚀 [Live Demo](https://student-course-cxj7.onrender.com)**
 
 **Key Features:**
 
