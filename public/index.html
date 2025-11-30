@@ -251,7 +251,9 @@
               <div class="position-relative z-1">
                 <h3 class="fw-bold mb-3">Ready to Enroll?</h3>
                 <p class="opacity-75 mb-3">
-                  Match students with the right courses and record enrollments instantly. Enrollments are visible under each course and can be managed anytime.
+                  Match students with the right courses and record enrollments
+                  instantly. Enrollments are visible under each course and can
+                  be managed anytime.
                 </p>
               </div>
               <div class="shape-overlay"></div>
@@ -597,6 +599,52 @@
                 Update Course
               </button>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Alerts Container -->
+    <div
+      id="globalAlerts"
+      class="position-fixed top-0 end-0 p-3"
+      style="z-index: 1080"
+    ></div>
+
+    <!-- Confirm Delete Modal -->
+    <div
+      class="modal fade"
+      id="confirmDeleteModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow-lg">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmDeleteTitle">Confirm delete</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="confirmDeleteBody">
+              Are you sure you want to delete this item?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button id="confirmDeleteBtn" type="button" class="btn btn-danger">
+              Delete
+            </button>
           </div>
         </div>
       </div>

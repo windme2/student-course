@@ -174,19 +174,23 @@ function renderStudents(students) {
 
                     <div class="card-divider mt-auto d-flex justify-content-between align-items-center">
                          <span class="badge-major">${escapeHtml(s.major)}</span>
-                         <div class="d-flex align-items-center">
-                           <button class="btn-icon-soft" 
-                              onclick="openEditStudentModal('${
-                                s.id
-                              }', '${escapeHtml(s.fullname)}', '${escapeHtml(
-        s.email
-      )}', '${escapeHtml(s.major)}')">
-                              <i class="fas fa-pen fa-sm"></i>
-                          </button>
-                          <button class="btn-delete ms-2" onclick="deleteStudent('${s.id}')" title="Delete student">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                         </div>
+                                            <div class="d-flex align-items-center">
+                                               <button class="btn-icon-soft" 
+                                                  onclick="openEditStudentModal('${
+                                                    s.id
+                                                  }', '${escapeHtml(
+        s.fullname
+      )}', '${escapeHtml(s.email)}', '${escapeHtml(s.major)}')">
+                                                  <i class="fas fa-pen fa-sm"></i>
+                                              </button>
+                                              <button class="btn-delete ms-2" onclick="showDeleteModal('student','${
+                                                s.id
+                                              }','${escapeHtml(
+        s.fullname
+      )}')" title="Delete student">
+                                                <i class="fas fa-trash"></i>
+                                              </button>
+                                             </div>
                     </div>
                 </div>
             </div>
@@ -244,7 +248,11 @@ function renderCourses(courseList) {
         )}', '${c.credit}')">
                                     <i class="fas fa-pen fa-sm"></i>
                                 </button>
-                                <button class="btn-delete ms-2" onclick="deleteCourse('${c.id}')" title="Delete course">
+                                <button class="btn-delete ms-2" onclick="showDeleteModal('course','${
+                                  c.id
+                                }','${escapeHtml(
+          c.name
+        )}')" title="Delete course">
                                   <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -340,10 +348,9 @@ function setupForm(formId, endpoint, method, callback, useIdInUrl = false) {
           if (resultDiv) {
             resultDiv.innerHTML =
               '<div class="alert alert-success mt-3">Enrollment successful — the student has been added to the course.</div>';
-            // auto-hide after 4 seconds
             setTimeout(() => {
               resultDiv.innerHTML = "";
-            }, 4000);
+            }, 10000);
           }
         } else {
           const modalEl = form.closest(".modal");
@@ -381,40 +388,76 @@ window.openEditCourseModal = function (id, name, desc, credit) {
   new bootstrap.Modal(document.getElementById("editCourseModal")).show();
 };
 // Delete student
-window.deleteStudent = async function (id) {
-  if (!confirm('Delete this student? This will remove the student record.')) return;
-  try {
-    const res = await fetch(`${API_BASE}/students/${id}`, { method: 'DELETE' });
-    if (res.ok) {
-      await loadStudents();
-      alert('Student deleted');
-    } else {
-      const e = await res.json();
-      alert(e.error || 'Failed to delete student');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Network error');
-  }
+// Delete flow using confirmation modal
+let pendingDelete = null; // { type: 'student'|'course', id, name }
+
+window.showDeleteModal = function (type, id, name) {
+  pendingDelete = { type, id, name };
+  const titleEl = document.getElementById("confirmDeleteTitle");
+  const bodyEl = document.getElementById("confirmDeleteBody");
+  if (titleEl)
+    titleEl.innerText = `Delete ${type === "student" ? "student" : "course"}`;
+  if (bodyEl)
+    bodyEl.innerText = `Are you sure you want to delete "${name}"? This action cannot be undone.`;
+  const modalEl = document.getElementById("confirmDeleteModal");
+  if (modalEl) new bootstrap.Modal(modalEl).show();
 };
 
-// Delete course
-window.deleteCourse = async function (id) {
-  if (!confirm('Delete this course? This will remove the course and its enrollments.')) return;
+async function performDelete() {
+  if (!pendingDelete) return;
+  const { type, id, name } = pendingDelete;
+  const url = `${API_BASE}/${
+    type === "student" ? "students" : "courses"
+  }/${id}`;
   try {
-    const res = await fetch(`${API_BASE}/courses/${id}`, { method: 'DELETE' });
+    const res = await fetch(url, { method: "DELETE" });
     if (res.ok) {
-      await loadCourses();
-      alert('Course deleted');
+      // hide modal
+      const modalEl = document.getElementById("confirmDeleteModal");
+      if (modalEl) bootstrap.Modal.getInstance(modalEl)?.hide();
+      // refresh lists
+      if (type === "student") await loadStudents();
+      else await loadCourses();
+      showGlobalAlert(
+        `${type === "student" ? "Student" : "Course"} "${name}" deleted`,
+        "success"
+      );
     } else {
       const e = await res.json();
-      alert(e.error || 'Failed to delete course');
+      showGlobalAlert(e.error || "Failed to delete item", "danger");
     }
   } catch (err) {
     console.error(err);
-    alert('Network error');
+    showGlobalAlert("Network error", "danger");
+  } finally {
+    pendingDelete = null;
   }
-};
+}
+
+// Confirm button wiring
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("confirmDeleteBtn");
+  if (btn) btn.addEventListener("click", performDelete);
+});
+
+// Global alert helper (top-right)
+function showGlobalAlert(message, type = "success", timeout = 4000) {
+  const container = document.getElementById("globalAlerts");
+  if (!container) return;
+  const id = `ga-${Date.now()}`;
+  const div = document.createElement("div");
+  div.id = id;
+  div.className = `alert alert-${type} shadow-sm mb-2`;
+  div.role = "alert";
+  div.innerText = message;
+  container.appendChild(div);
+  setTimeout(() => {
+    div.classList.add("fade");
+    try {
+      container.removeChild(div);
+    } catch (e) {}
+  }, timeout);
+}
 function escapeHtml(text) {
   if (!text) return "";
   return text
