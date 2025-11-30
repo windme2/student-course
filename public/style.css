@@ -249,3 +249,15 @@ section {
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(4px);
 }
+
+/* Make Bootstrap modal transitions snappier */
+.modal.fade .modal-dialog {
+  transition-duration: 140ms !important;
+  transition-timing-function: ease-out !important;
+}
+.modal-backdrop.fade {
+  transition-duration: 140ms !important;
+}
+.modal .modal-dialog {
+  will-change: transform, opacity;
+}

@@ -6,6 +6,25 @@ let courses = [];
 document.addEventListener("DOMContentLoaded", () => {
   loadData();
 
+  // Pre-initialize modals
+  try {
+    [
+      'enrollmentModal',
+      'enrolledStudentsModal',
+      'addStudentModal',
+      'editStudentModal',
+      'addCourseModal',
+      'editCourseModal',
+      'confirmDeleteModal'
+    ].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) new bootstrap.Modal(el, { backdrop: true });
+    });
+  } catch (e) {
+    // ignore if bootstrap not ready yet
+    console.debug('Modal pre-init skipped', e);
+  }
+
   // Setup generic form handlers
   setupForm("addStudentForm", "/students", "POST", loadStudents);
   setupForm("addCourseForm", "/courses", "POST", loadCourses);
