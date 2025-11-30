@@ -174,7 +174,7 @@ function renderStudents(students) {
 
                     <div class="card-divider mt-auto d-flex justify-content-between align-items-center">
                          <span class="badge-major">${escapeHtml(s.major)}</span>
-                         <div>
+                         <div class="d-flex align-items-center">
                            <button class="btn-icon-soft" 
                               onclick="openEditStudentModal('${
                                 s.id
@@ -182,6 +182,9 @@ function renderStudents(students) {
         s.email
       )}', '${escapeHtml(s.major)}')">
                               <i class="fas fa-pen fa-sm"></i>
+                          </button>
+                          <button class="btn-delete ms-2" onclick="deleteStudent('${s.id}')" title="Delete student">
+                            <i class="fas fa-trash"></i>
                           </button>
                          </div>
                     </div>
@@ -240,6 +243,9 @@ function renderCourses(courseList) {
           c.description || ""
         )}', '${c.credit}')">
                                     <i class="fas fa-pen fa-sm"></i>
+                                </button>
+                                <button class="btn-delete ms-2" onclick="deleteCourse('${c.id}')" title="Delete course">
+                                  <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
@@ -331,9 +337,14 @@ function setupForm(formId, endpoint, method, callback, useIdInUrl = false) {
       if (res.ok) {
         if (formId === "enrollForm") {
           const resultDiv = document.getElementById("enrollResult");
-          if (resultDiv)
+          if (resultDiv) {
             resultDiv.innerHTML =
-              '<div class="alert alert-success mt-3">Success!</div>';
+              '<div class="alert alert-success mt-3">Enrollment successful — the student has been added to the course.</div>';
+            // auto-hide after 4 seconds
+            setTimeout(() => {
+              resultDiv.innerHTML = "";
+            }, 4000);
+          }
         } else {
           const modalEl = form.closest(".modal");
           if (modalEl) bootstrap.Modal.getInstance(modalEl).hide();
@@ -368,6 +379,41 @@ window.openEditCourseModal = function (id, name, desc, credit) {
   document.getElementById("editCourseDesc").value = desc;
   document.getElementById("editCourseCredit").value = credit;
   new bootstrap.Modal(document.getElementById("editCourseModal")).show();
+};
+// Delete student
+window.deleteStudent = async function (id) {
+  if (!confirm('Delete this student? This will remove the student record.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/students/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      await loadStudents();
+      alert('Student deleted');
+    } else {
+      const e = await res.json();
+      alert(e.error || 'Failed to delete student');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Network error');
+  }
+};
+
+// Delete course
+window.deleteCourse = async function (id) {
+  if (!confirm('Delete this course? This will remove the course and its enrollments.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/courses/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      await loadCourses();
+      alert('Course deleted');
+    } else {
+      const e = await res.json();
+      alert(e.error || 'Failed to delete course');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Network error');
+  }
 };
 function escapeHtml(text) {
   if (!text) return "";

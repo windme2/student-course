@@ -100,6 +100,40 @@ body {
   box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
 }
 
+/* Delete button variant */
+.btn-delete {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #fdecea;
+  background-color: #fff;
+  color: #ef4444;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+}
+.btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.06);
+  border-color: rgba(239,68,68,0.25);
+  background-color: #fff7f7;
+}
+
+/* Enrollment pane tweaks */
+.enroll-panel .col-lg-5 {
+  min-height: 260px;
+}
+.enroll-panel h3 { letter-spacing: -0.5px; }
+.enroll-panel ul li { color: #334155; }
+
+/* Success alert tweak */
+.alert-success {
+  background-color: rgba(16,185,129,0.08);
+  border-color: rgba(16,185,129,0.16);
+  color: #065f46;
+}
+
 /* Major/department badge shown near the credits area */
 .badge-major {
   padding: 6px 10px;
