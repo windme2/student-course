@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Course Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+      <div class="container">
+        <a
+          class="navbar-brand fw-bold d-flex align-items-center gap-2"
+          href="#"
+        >
+          <div class="brand-icon">
+            <i class="fas fa-graduation-cap text-white"></i>
+          </div>
+          <span class="brand-text">SCMS</span>
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <i class="fas fa-bars text-dark"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto gap-lg-4">
+            <li class="nav-item">
+              <a class="nav-link" href="#students">Students</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#courses">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-primary btn-glow px-4 rounded-pill"
+                href="#enroll"
+              >
+                Enroll Now
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero-section d-flex align-items-center">
+      <div class="container text-center position-relative z-1">
+        <h1
+          class="display-3 fw-bold mb-3 fade-in-up"
+          style="animation-delay: 0.2s"
+        >
+          Student Course <span class="text-gradient">Management</span>
+        </h1>
+        <p
+          class="lead mb-4 opacity-75 mx-auto fade-in-up"
+          style="max-width: 600px; animation-delay: 0.3s"
+        >
+          Effortlessly manage students, explore courses, and handle enrollments
+          with our modern, intuitive platform.
+        </p>
+        <div
+          class="d-flex justify-content-center gap-3 fade-in-up"
+          style="animation-delay: 0.4s"
+        >
+          <a
+            href="#enroll"
+            class="btn btn-dark btn-lg rounded-pill px-5 shadow-lg"
+          >
+            Get Started
+          </a>
+          <a
+            href="#courses"
+            class="btn btn-outline-dark btn-lg rounded-pill px-5"
+          >
+            View Courses
+          </a>
+        </div>
+
+        <div
+          class="row justify-content-center mt-5 fade-in-up"
+          style="animation-delay: 0.5s"
+        >
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-2 text-secondary">
+              <i class="fas fa-user-graduate fa-lg text-primary"></i>
+              <span class="h5 mb-0 fw-bold" id="totalStudents">-</span> Students
+            </div>
+          </div>
+          <div class="col-auto border-start border-secondary mx-3"></div>
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-2 text-secondary">
+              <i class="fas fa-book-open fa-lg text-success"></i>
+              <span class="h5 mb-0 fw-bold" id="totalCourses">-</span> Courses
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mb-5 position-relative z-1">
+      <section class="mb-5 fade-in-section">
+        <div class="row g-4 text-center">
+          <div class="col-md-4">
+            <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+              <div
+                class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3"
+                style="width: 60px; height: 60px"
+              >
+                <i class="fas fa-user-plus fa-lg"></i>
+              </div>
+              <h5 class="fw-bold">1. Add Students</h5>
+              <p class="text-muted small mb-0">
+                Can add new students to the system.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+              <div
+                class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle mb-3"
+                style="width: 60px; height: 60px"
+              >
+                <i class="fas fa-book fa-lg"></i>
+              </div>
+              <h5 class="fw-bold">2. Create Courses</h5>
+              <p class="text-muted small mb-0">
+                New courses with credits and descriptions for students.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+              <div
+                class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning rounded-circle mb-3"
+                style="width: 60px; height: 60px"
+              >
+                <i class="fas fa-check-circle fa-lg"></i>
+              </div>
+              <h5 class="fw-bold">3. Enroll</h5>
+              <p class="text-muted small mb-0">
+                Easily enroll students into courses using the form below.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="students" class="mb-5 fade-in-section">
+        <div
+          class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3"
+        >
+          <div>
+            <h6
+              class="text-uppercase text-primary fw-bold letter-spacing-2 mb-1"
+            >
+              Directory
+            </h6>
+            <h2 class="fw-bold mb-0">Students List</h2>
+          </div>
+          <div class="d-flex gap-3 align-items-center">
+            <div
+              class="input-group shadow-sm rounded-pill overflow-hidden bg-white"
+              style="width: 250px"
+            >
+              <span class="input-group-text bg-white border-0 ps-3"
+                ><i class="fas fa-search text-muted"></i
+              ></span>
+              <input
+                type="text"
+                id="studentSearch"
+                class="form-control border-0 py-2"
+                placeholder="Search..."
+              />
+            </div>
+            <button
+              class="btn btn-primary rounded-pill px-4 shadow-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#addStudentModal"
+            >
+              <i class="fas fa-plus me-2"></i>Add
+            </button>
+          </div>
+        </div>
+
+        <div id="studentsList" class="row g-4">
+          <div class="col-12">
+            <div
+              class="card border-0 shadow-sm rounded-4 p-5 text-center bg-light bg-opacity-50"
+            >
+              <div class="mb-3 text-secondary opacity-50">
+                <i class="fas fa-user-slash fa-3x"></i>
+              </div>
+              <h5 class="text-secondary fw-bold">No Students Found</h5>
+              <p class="text-muted small mb-0">
+                The directory is currently empty.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="courses" class="mb-5 fade-in-section">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <h6
+              class="text-uppercase text-success fw-bold letter-spacing-2 mb-1"
+            >
+              Curriculum
+            </h6>
+            <h2 class="fw-bold mb-0">Available Courses</h2>
+          </div>
+          <button
+            class="btn btn-success rounded-pill px-4 shadow-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#addCourseModal"
+          >
+            <i class="fas fa-plus me-2"></i>Add
+          </button>
+        </div>
+        <div id="coursesList" class="row g-4"></div>
+      </section>
+
+      <section id="enroll" class="mb-5 fade-in-section">
+        <div class="card border-0 shadow-xl rounded-5 overflow-hidden bg-white">
+          <div class="row g-0">
+            <div
+              class="col-lg-5 bg-primary p-5 text-white d-flex flex-column justify-content-center position-relative overflow-hidden"
+            >
+              <div class="position-relative z-1">
+                <h3 class="fw-bold mb-3">Ready to Enroll?</h3>
+                <p class="opacity-75 mb-4">
+                  Select a student and a course to begin the learning journey.
+                  It's quick and easy.
+                </p>
+              </div>
+              <div class="shape-overlay"></div>
+            </div>
+            <div class="col-lg-7 p-5">
+              <h4 class="fw-bold mb-4 text-dark">Enrollment Form</h4>
+              <form id="enrollForm" class="row g-4">
+                <div class="col-12">
+                  <div class="form-floating">
+                    <select
+                      class="form-select bg-light border-0"
+                      id="studentId"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Select a student
+                      </option>
+                    </select>
+                    <label for="studentId" class="text-secondary fw-medium"
+                      ><i class="fas fa-user-graduate me-2"></i>Student</label
+                    >
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <select
+                      class="form-select bg-light border-0"
+                      id="courseId"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Select a course
+                      </option>
+                    </select>
+                    <label for="courseId" class="text-secondary fw-medium"
+                      ><i class="fas fa-book-open me-2"></i>Course</label
+                    >
+                  </div>
+                </div>
+                <div class="col-12 mt-5">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm fw-bold py-3"
+                  >
+                    Confirm Enrollment <i class="fas fa-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </form>
+              <div id="enrollResult" class="mt-4 fw-medium"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="bg-dark text-white py-5 mt-auto position-relative overflow-hidden"
+    >
+      <div class="text-center text-white-50 small">
+        &copy; 2025 Student Course Management System. All rights reserved.
+      </div>
+    </footer>
+
+    <div
+      class="modal fade"
+      id="enrollmentModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">
+              <i class="fas fa-users text-primary me-2"></i>Enrolled Students:
+              <span id="selectedCourseName" class="text-primary"></span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0 align-middle">
+                <thead class="bg-light">
+                  <tr>
+                    <th class="ps-4 py-3">Student Name</th>
+                    <th class="py-3">Email</th>
+                    <th class="py-3">Major</th>
+                    <th class="pe-4 py-3 text-end">Enrolled Date</th>
+                  </tr>
+                </thead>
+                <tbody id="enrolledStudentsList"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addStudentModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">Add New Student</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="addStudentForm">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="studentName"
+                  placeholder="Full Name"
+                  required
+                />
+                <label for="studentName">Full Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control bg-white border"
+                  id="studentEmail"
+                  placeholder="Email"
+                  required
+                />
+                <label for="studentEmail">Email Address</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="studentMajor"
+                  placeholder="Major"
+                  required
+                />
+                <label for="studentMajor">Major</label>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100 rounded-pill py-3 fw-bold"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="editStudentModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">Edit Student</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="editStudentForm">
+              <input type="hidden" id="editStudentId" />
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="editStudentName"
+                  placeholder="Full Name"
+                  required
+                />
+                <label for="editStudentName">Full Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control bg-white border"
+                  id="editStudentEmail"
+                  placeholder="Email"
+                  required
+                />
+                <label for="editStudentEmail">Email Address</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="editStudentMajor"
+                  placeholder="Major"
+                  required
+                />
+                <label for="editStudentMajor">Major</label>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100 rounded-pill py-3 fw-bold"
+              >
+                Update Student
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addCourseModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">Create New Course</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="addCourseForm">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="courseName"
+                  placeholder="Course Name"
+                  required
+                />
+                <label for="courseName">Course Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea
+                  class="form-control bg-white border"
+                  id="courseDesc"
+                  placeholder="Description"
+                  style="height: 100px"
+                ></textarea>
+                <label for="courseDesc">Description</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input
+                  type="number"
+                  class="form-control bg-white border"
+                  id="courseCredit"
+                  placeholder="Credits"
+                  required
+                  min="1"
+                  max="6"
+                />
+                <label for="courseCredit">Credits</label>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-success w-100 rounded-pill py-3 fw-bold"
+              >
+                Create
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="editCourseModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold">Edit Course</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="editCourseForm">
+              <input type="hidden" id="editCourseId" />
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control bg-white border"
+                  id="editCourseName"
+                  placeholder="Course Name"
+                  required
+                />
+                <label for="editCourseName">Course Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea
+                  class="form-control bg-white border"
+                  id="editCourseDesc"
+                  placeholder="Description"
+                  style="height: 100px"
+                ></textarea>
+                <label for="editCourseDesc">Description</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input
+                  type="number"
+                  class="form-control bg-white border"
+                  id="editCourseCredit"
+                  placeholder="Credits"
+                  required
+                  min="1"
+                  max="6"
+                />
+                <label for="editCourseCredit">Credits</label>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-success w-100 rounded-pill py-3 fw-bold"
+              >
+                Update Course
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
