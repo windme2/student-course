@@ -82,6 +82,41 @@ body {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Improve hover feedback for interactive feel */
+.card {
+  will-change: transform;
+  cursor: default;
+}
+.card:hover {
+  cursor: pointer;
+}
+
+/* Slight lift for the icon action buttons */
+.btn-icon-soft {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+}
+.btn-icon-soft:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+}
+
+/* Major/department badge shown near the credits area */
+.badge-major {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  background: rgba(99,102,241,0.08); /* soft indigo */
+  color: var(--primary-color);
+  border: 1px solid rgba(99,102,241,0.12);
+}
+
+/* Make the badge for ID a bit smaller to fit top-right */
+.badge-soft.rounded-pill {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+
 /* Icon Box (The circle/rounded square behind icons) */
 .icon-box {
   width: 48px;

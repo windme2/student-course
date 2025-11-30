@@ -160,8 +160,8 @@ function renderStudents(students) {
                         <div class="icon-box primary">
                             <i class="fas fa-user-graduate"></i>
                         </div>
-                        <span class="badge-soft badge-soft-primary">
-                            ${escapeHtml(s.major)}
+                        <span class="badge-soft badge-soft-primary rounded-pill">
+                            ID: ${s.id}
                         </span>
                     </div>
 
@@ -172,15 +172,18 @@ function renderStudents(students) {
                         )}
                     </p>
 
-                    <div class="card-divider mt-auto d-flex justify-content-end">
-                         <button class="btn-icon-soft" 
-                            onclick="openEditStudentModal('${
-                              s.id
-                            }', '${escapeHtml(s.fullname)}', '${escapeHtml(
+                    <div class="card-divider mt-auto d-flex justify-content-between align-items-center">
+                         <span class="badge-major">${escapeHtml(s.major)}</span>
+                         <div>
+                           <button class="btn-icon-soft" 
+                              onclick="openEditStudentModal('${
+                                s.id
+                              }', '${escapeHtml(s.fullname)}', '${escapeHtml(
         s.email
       )}', '${escapeHtml(s.major)}')">
-                            <i class="fas fa-pen fa-sm"></i>
-                        </button>
+                              <i class="fas fa-pen fa-sm"></i>
+                          </button>
+                         </div>
                     </div>
                 </div>
             </div>

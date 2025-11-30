@@ -1,6 +1,6 @@
 # 🎓 Student Course Management System
 
-> **🚀 [Live Demo]()**
+> **🚀 [Live Demo](https://student-course-cxj7.onrender.com)**
 
 **is a web-based application designed to facilitate the management of academic records. It provides a comprehensive interface for administrators to manage students, courses, and enrollments efficiently. The system features a modern, responsive user interface and a robust RESTful API backend.**
 
@@ -138,8 +138,8 @@ module.exports = supabase;
 [
   {
     "id": 1,
-    "fullname": "Win Tester",
-    "email": "win@test.com",
+    "fullname": "Wind Tester",
+    "email": "wind@test.com",
     "major": "IT"
   }
 ]
