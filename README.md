@@ -1,6 +1,6 @@
 # 🎓 Student Course Management System
 
-**is a web-based application designed to facilitate the management of academic records. It provides a comprehensive interface for administrators to manage students, courses, and enrollments efficiently. The system features a modern, responsive user interface and a robust RESTful API backend.**
+**A web-based system for academic records, giving administrators efficient tools for students, courses, and enrollments.**
 
 > **🚀 [Live Demo](https://student-course-cxj7.onrender.com)**
 
@@ -261,3 +261,4 @@ Optional:
 ## 📝 License
 
 This project is licensed under the MIT License.
+
